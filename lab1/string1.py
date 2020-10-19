@@ -5,6 +5,8 @@ def num_of_items(count):
   return "Number of: " + number
   
 def start_end_symbols(s):
+  if len(s) < 2:
+    return "The string is too short"
   return s[0:2] + s[-2:]
 
 def replace_char(s):
