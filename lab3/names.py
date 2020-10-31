@@ -1,12 +1,15 @@
 from bs4 import BeautifulSoup
 import re
 import sys
+import os
 
 def extr_name(filename):
+  if not(os.access(filename, os.R_OK)):
+    print("File does not exist or cannot be read.")
+    sys.exit(1)
   html = open(filename).read()
   soup = BeautifulSoup(html, features="html.parser")
   
-  s = re.search(r"\D+(\d{4}).html", filename).group(1)
   all_names = []
   male_names = []
   female_names = []
@@ -15,25 +18,32 @@ def extr_name(filename):
       m = re.search(r"<tr align=\"right\"><td>(\d+)</td><td>(\w+)</td><td>(\w+)</td>",row)
       male_names.append([int(m.group(1)), m.group(2)])
       female_names.append([int(m.group(1)), m.group(3)])
-  all_names = [s] + male_names + female_names
+  all_names = male_names + female_names
   all_names.sort(key = lambda x: x[-1])
   
   names = (all_names, male_names, female_names)
   return names
 
+def names_to_str(filename, names):
+  s = filename + "\n"
+  for name in names:
+    s += str(name[0]) + " " + name[1] + "\n"
+  return s
+
 
 def main():
   args = sys.argv[1:]
-  print(args)
   if not args:
     print("use: [--file] file [file ...]")
     sys.exit(1)
   else:
     for filename in args:
+      s = re.search(r"\D+(\d{4}).html", filename).group(1)
+
       names = extr_name(filename)
-      print(filename, "\n", names[0][:10])
-      print("TOP-10 male:\n", names[1][:10])
-      print("TOP-10 female:\n", names[2][:10])
+      print(names_to_str(s, names[0][:10]))
+      print(names_to_str("TOP-10 male:", names[1][:10]))
+      print(names_to_str("TOP-10 female:", names[2][:10]))
 
 if __name__ == '__main__':
   main()

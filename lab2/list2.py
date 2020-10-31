@@ -1,7 +1,6 @@
 def rm_adj(nums):
   return list(set(nums))
 
-
 def merge(lst1, lst2):
   return sorted(lst1 + lst2)
 
