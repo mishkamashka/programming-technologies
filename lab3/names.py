@@ -1,4 +1,3 @@
-from bs4 import BeautifulSoup
 import re
 import sys
 import os
@@ -8,7 +7,6 @@ def extr_name(filename):
     print("File does not exist or cannot be read.")
     sys.exit(1)
   html = open(filename).read()
-  soup = BeautifulSoup(html, features="html.parser")
   
   all_names = []
   male_names = []
@@ -41,7 +39,7 @@ def main():
       s = re.search(r"\D+(\d{4}).html", filename).group(1)
 
       names = extr_name(filename)
-      print(names_to_str(s, names[0][:10]))
+      print(names_to_str(s, names[0]))
       print(names_to_str("TOP-10 male:", names[1][:10]))
       print(names_to_str("TOP-10 female:", names[2][:10]))
 
