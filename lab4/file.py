@@ -42,7 +42,7 @@ def main():
   if not(os.access(filename, os.R_OK)):
     print("File does not exist or cannot be read.")
     sys.exit(1)
-  print(*generate_text(5, mem_dict(filename)))
+  print(*generate_text(10, mem_dict(filename)))
 
 if __name__ == '__main__':
   main()

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Guess who</h1>
+
+    <form name="lvl_chooser" action="/game" method="post">
+        <p>Choose wisely:</p>
+        <p>
+            <input type="radio" name="options" value="easy" required> easy </input>
+            <input type="radio" name="options" value="med"> medium </input>
+            <input type="radio" name="options" value="hard"> hard </input>
+        </p>
+        <p><input type=submit value=Continue></p>
+    </form>
+{% endblock %}

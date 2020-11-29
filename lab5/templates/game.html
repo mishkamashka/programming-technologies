@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Guess who</h1>
+    <img src="{{img_link}}"/>
+    <form name="game" action="/result" method="post">
+    <p>Who?</p>
+    <p>
+        {% for name in options %}
+        <input type="radio" name="options" value="{{ name }}" required> {{ name }} </input>
+        {% endfor %}
+    </p>
+    <p><input type=submit value="ok"></p>
+    </form>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Well..</h1>
+    <p>{{ message }}</p>
+    <p>{{lvl}}</p>
+    <a href="/">Try again</a>
+
+    <!-- <form name="lvl_chooser" action="/game" method="post"></form>
+        <p>
+            
+        </p>
+    </form> -->
+
+    <form method="post" action="/game">
+        <input type="hidden" name="options" value="{{lvl}}" autocomplete="on">
+        <input type="submit" value="retry">
+      </form>
+
+    <!-- <form name="lvl_chooser" action="/game" method="post"></form>
+        <p>Choose wisely:</p>
+        <p>
+            <input type="radio" name="options" value="easy" required> easy </input>
+            <input type="radio" name="options" value="med"> medium </input>
+            <input type="radio" name="options" value="hard"> hard </input>
+        </p>
+        <p><input type=submit value=Continue></p>
+    </form> -->
+{% endblock %}
