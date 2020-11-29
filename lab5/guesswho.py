@@ -21,9 +21,9 @@ def init():
 def show_result():
     global correct_name
     chosen_name = request.form["options"]
-    message = "Wrong!"
+    message = "Nope, it's " + correct_name
     if chosen_name == correct_name:
-        message = "You're right"
+        message = "Yep, that is " + correct_name
     return render_template("result.html", message=message, lvl=lvl)
 
 @app.route("/game", methods=["post"])
@@ -50,16 +50,14 @@ def game():
 
 def get_random_image_link(name, n):
   query="%2B".join(name.split())
-  url = "https://www.google.com/search?q=" + query + "&source=lnms&tbm=isch"
+  url = "https://www.google.com/search?q=" + query + "&tbm=isch&tbs=isz:lt,islt:6mp"
   response = requests.get(url).text
   soup = BeautifulSoup(response,"html.parser")
   img_links = [a["src"] for a in soup.find_all("img", {"src": re.compile("gstatic.com")})]
   return random.choice(img_links)
 
     # name = name.replace(" ", "%20")
-    # name = name.replace(" ", "+")
-
-    # # url = "http://yandex.ru/images/search?text=" + name + "%20face"
+    # url = "http://yandex.ru/images/search?text=" + name + "%20face"
     # html = requests.get(url).text
     # soup = BeautifulSoup(html,"lxml")
     # img_links=[]
